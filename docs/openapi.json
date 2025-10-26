@@ -1,9 +1,9 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "Default module",
+    "title": "loa-key-pool",
     "description": "",
-    "version": "1.0.0"
+    "version": "0.0.1"
   },
   "tags": [
     {
@@ -18,6 +18,38 @@
   ],
   "paths": {
     "/keys": {
+      "get": {
+        "summary": "list keys",
+        "deprecated": false,
+        "description": "",
+        "operationId": "list.keys",
+        "tags": [
+          "key",
+          "external"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Key"
+                  }
+                }
+              }
+            },
+            "headers": {}
+          },
+          "204": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": []
+      },
       "post": {
         "summary": "create key",
         "deprecated": false,
@@ -57,67 +89,21 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "properties": {}
-                }
-              }
-            },
-            "headers": {}
-          }
-        },
-        "security": []
-      },
-      "get": {
-        "summary": "list keys",
-        "deprecated": false,
-        "description": "",
-        "operationId": "list.keys",
-        "tags": [
-          "key",
-          "external"
-        ],
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Key"
-                  }
-                }
-              }
-            },
-            "headers": {}
-          },
-          "204": {
-            "description": "",
-            "headers": {}
-          }
-        },
-        "security": []
-      }
-    },
-    "/pick": {
-      "get": {
-        "summary": "pick key",
-        "deprecated": false,
-        "description": "",
-        "operationId": "pick.key",
-        "tags": [
-          "key",
-          "internal"
-        ],
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {}
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "key": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "key"
+                  ]
                 }
               }
             },
@@ -151,6 +137,52 @@
         "responses": {
           "204": {
             "description": "",
+            "headers": {}
+          },
+          "404": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/pick": {
+      "get": {
+        "summary": "pick key",
+        "deprecated": false,
+        "description": "",
+        "operationId": "pick.key",
+        "tags": [
+          "key",
+          "internal"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "key": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "key"
+                  ]
+                }
+              }
+            },
             "headers": {}
           }
         },

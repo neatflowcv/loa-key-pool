@@ -311,7 +311,11 @@ type CreateKeyResponseObject interface {
 	VisitCreateKeyResponse(w http.ResponseWriter) error
 }
 
-type CreateKey200JSONResponse map[string]interface{}
+type CreateKey200JSONResponse struct {
+	Description *string `json:"description,omitempty"`
+	Id          string  `json:"id"`
+	Key         string  `json:"key"`
+}
 
 func (response CreateKey200JSONResponse) VisitCreateKeyResponse(w http.ResponseWriter) error {
 	w.Header().Set("Content-Type", "application/json")
@@ -336,6 +340,14 @@ func (response DeleteKey204Response) VisitDeleteKeyResponse(w http.ResponseWrite
 	return nil
 }
 
+type DeleteKey404Response struct {
+}
+
+func (response DeleteKey404Response) VisitDeleteKeyResponse(w http.ResponseWriter) error {
+	w.WriteHeader(404)
+	return nil
+}
+
 type PickKeyRequestObject struct {
 }
 
@@ -343,7 +355,11 @@ type PickKeyResponseObject interface {
 	VisitPickKeyResponse(w http.ResponseWriter) error
 }
 
-type PickKey200JSONResponse map[string]interface{}
+type PickKey200JSONResponse struct {
+	Description *string `json:"description,omitempty"`
+	Id          string  `json:"id"`
+	Key         string  `json:"key"`
+}
 
 func (response PickKey200JSONResponse) VisitPickKeyResponse(w http.ResponseWriter) error {
 	w.Header().Set("Content-Type", "application/json")
